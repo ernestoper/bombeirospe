@@ -120,8 +120,10 @@ const InteractiveMap = ({ occurrences = [], height = '400px', onSelectOccurrence
                 'Acidente': 'orange',
                 'Inundação': 'blue',
                 'Resgate': 'green',
-                'Desabamento': 'purple',
-                'Salvamento': 'cadetblue'
+                'Desabamento': 'blue',
+                'Salvamento': 'green',
+                'Emergência Médica':'red',
+                'Queda de Árvore':'orange',
               };
               
               const color = colorMap[occurrence.tipo] || 'gray';

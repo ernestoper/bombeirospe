@@ -131,5 +131,46 @@ export const mockOccurrences = [
     longitude: -34.8776,
     vitimas: 1,
     tempoResposta: '10min'
-  }
-];
+  },
+  // Novos registros gerados automaticamente (500 ocorrências)
+  ...Array.from({ length: 200 }, (_, i) => {
+    const id = i + 13; // Continuando a numeração
+    const tipos = ['Incêndio', 'Acidente', 'Inundação', 'Resgate', 'Queda de Árvore', 'Desabamento', 'Emergência Médica'];
+    const statusOptions = ['Em Andamento', 'Controlado', 'Finalizado'];
+    const bairrosRecife = [
+      'Boa Viagem', 'Boa Vista', 'Santo Amaro', 'Santo Antônio', 'São José', 
+      'Pina', 'Imbiribeira', 'Afogados', 'Estância', 'Barro', 
+      'Cordeiro', 'Encruzilhada', 'Casa Amarela', 'Tamarineira', 'Várzea',
+      'Madalena', 'Parnamirim', 'Espinheiro', 'Graças', 'Aflitos'
+    ];
+    
+    // Gera data/hora aleatória nos últimos 30 dias
+    const dataHora = new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000));
+    dataHora.setHours(Math.floor(Math.random() * 24));
+    dataHora.setMinutes(Math.floor(Math.random() * 60));
+    
+    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+    const status = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+    const vitimas = Math.floor(Math.random() * 5); // 0-4 vítimas
+    const tempoResposta = `${Math.floor(Math.random() * 15) + 1}min`; // 1-15 minutos
+    
+    // Gera coordenadas dentro da área de Recife
+    const latitude = -8.05 + (Math.random() * 0.1 - 0.05); // -8.00 a -8.10
+    const longitude = -34.90 + (Math.random() * 0.1 - 0.05); // -34.85 a -34.95
+    
+    const numero = Math.floor(Math.random() * 3000) + 1;
+    const bairro = bairrosRecife[Math.floor(Math.random() * bairrosRecife.length)];
+    const endereco = `Av. ${['Conselheiro Aguiar', 'Recife', 'Conde da Boa Vista', 'Caxangá', 'Norte', 'Sul'][Math.floor(Math.random() * 6)]}, ${numero}, ${bairro}, Recife`;
+    
+    return {
+      id,
+      tipo,
+      dataHora: dataHora.toISOString(),
+      status,
+      endereco,
+      latitude: parseFloat(latitude.toFixed(4)),
+      longitude: parseFloat(longitude.toFixed(4)),
+      vitimas,
+      tempoResposta
+    };
+  })];
