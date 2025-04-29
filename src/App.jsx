@@ -67,7 +67,7 @@ function App() {
           
           {/* Rota de análise (protegida) */}
           <Route path="/analysis" element={
-            <ProtectedRoute pageTitle="Análise de Dados">
+            <ProtectedRoute pageTitle="">
               <AnalysisPage />
             </ProtectedRoute>
           } />

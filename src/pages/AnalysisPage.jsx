@@ -122,9 +122,9 @@ function AnalysisPage({ user, onLogout }) {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar user={user} />
+
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header user={user} onLogout={onLogout} />
+
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-800">Análise Detalhada</h2>

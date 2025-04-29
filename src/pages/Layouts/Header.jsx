@@ -44,7 +44,7 @@ const Header = ({ toggleSidebar, pageTitle }) => {
               <div className="flex-shrink-0 flex items-center">
                 <img
                   className="h-8 w-auto mr-3"
-                  src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png"
+                  src="../../../assets/logo.png"
                   alt="CBMPE Logo"
                 />
                 <h1 className="text-lg font-medium text-gray-800 hidden md:block">
