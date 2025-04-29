@@ -133,7 +133,7 @@ export const mockOccurrences = [
     tempoResposta: '10min'
   },
   // Novos registros gerados automaticamente (500 ocorrências)
-  ...Array.from({ length: 200 }, (_, i) => {
+  ...Array.from({ length: 100 }, (_, i) => {
     const id = i + 13; // Continuando a numeração
     const tipos = ['Incêndio', 'Acidente', 'Inundação', 'Resgate', 'Queda de Árvore', 'Desabamento', 'Emergência Médica'];
     const statusOptions = ['Em Andamento', 'Controlado', 'Finalizado'];
