@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import cbmpeLogo from './../../assets/logo.png'; // Importa a imagem
 /**
  * Componente de cabeçalho para todas as páginas
  */
@@ -43,12 +43,12 @@ const Header = ({ toggleSidebar, pageTitle }) => {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
                 <img
-                  className="h-8 w-auto mr-3"
-                  src="../../../assets/logo.png"
+                  className="h-8 w-auto"
+                  src={cbmpeLogo} // Usa a variável importada como src
                   alt="CBMPE Logo"
                 />
                 <h1 className="text-lg font-medium text-gray-800 hidden md:block">
-                  CBMPE Business Intelligence
+                  CBMPE 
                 </h1>
               </div>
             </div>

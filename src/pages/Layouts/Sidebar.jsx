@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-
+import cbmpeLogo from './../../assets/logo.png'; // Importa a imagem
 /**
  * Componente de barra lateral de navegação
  */
@@ -75,9 +75,9 @@ const Sidebar = ({ open = true }) => {
       <div className="h-screen bg-gray-800 text-white w-16 flex flex-col shadow-lg z-10">
         <div className="p-4 flex justify-center border-b border-gray-700">
           <img
-            className="h-8 w-auto"
-            src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png"
-            alt="CBMPE Logo"
+          className="h-8 w-auto"
+          src={cbmpeLogo} // Usa a variável importada como src
+          alt="CBMPE Logo"
           />
         </div>
         <nav className="flex-1 px-2 py-4 space-y-2">
@@ -112,12 +112,12 @@ const Sidebar = ({ open = true }) => {
     <div className="h-screen bg-gray-800 text-white w-64 flex flex-col shadow-lg z-10">
       <div className="p-4 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center">
-          <img
-            className="h-8 w-auto mr-2"
-            src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png"
-            alt="CBMPE Logo"
-          />
-          <span className="font-semibold text-lg">CBMPE BI</span>
+        <img
+        className="h-12 w-auto"
+        src={cbmpeLogo} // Usa a variável importada como src
+        alt="CBMPE Logo"
+      />
+          <span className="font-semibold text-lg">CBMPE</span>
         </div>
       </div>
       <nav className="flex-1 px-2 py-4 space-y-1">
