@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Card from '../components/common/Card';
 import { mockOccurrences } from '../data/mockOccurrences';
+import { EnhancedReport } from '../components/reports/EnhancedReport';
 
 /**
- * Página de relatórios
+ * Página de relatórios aprimorada com insights analíticos
  * Acessível para usuários com permissão de operador ou superior
  */
 function ReportsPage() {
@@ -12,6 +13,7 @@ function ReportsPage() {
   const [filterArea, setFilterArea] = useState('all');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedReport, setGeneratedReport] = useState(null);
+  const [showAdvancedView, setShowAdvancedView] = useState(false);
   
   // Mock de áreas de atuação
   const areas = [
@@ -65,11 +67,11 @@ function ReportsPage() {
           ]
         }
       });
-    }, 2000);
+    }, 1500);
   };
   
-  // Função para renderizar o relatório gerado
-  const renderGeneratedReport = () => {
+  // Função para renderizar o relatório padrão gerado
+  const renderStandardReport = () => {
     if (!generatedReport) return null;
     
     const report = generatedReport;
@@ -90,6 +92,12 @@ function ReportsPage() {
               <p className="text-sm">{dateRangeName}</p>
             </div>
             <div className="flex space-x-3">
+              <button 
+                onClick={() => setShowAdvancedView(true)}
+                className="px-3 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700"
+              >
+                Ver Insights Avançados
+              </button>
               <button className="px-3 py-2 border border-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-50">
                 Imprimir
               </button>
@@ -223,6 +231,33 @@ function ReportsPage() {
     );
   };
   
+  // Função para renderizar a visão avançada de insights
+  const renderAdvancedReport = () => {
+    if (!generatedReport) return null;
+    
+    return (
+      <div className="mt-6">
+        <div className="mb-4 flex justify-between items-center">
+          <h2 className="text-xl font-semibold text-gray-800">Insights Avançados</h2>
+          <button 
+            onClick={() => setShowAdvancedView(false)}
+            className="px-3 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700"
+          >
+            Voltar para Visão Padrão
+          </button>
+        </div>
+        
+        {/* Componente de relatório avançado */}
+        <EnhancedReport 
+          reportType={reportType}
+          occurrences={mockOccurrences}
+          dateRange={dateRange}
+          area={filterArea}
+        />
+      </div>
+    );
+  };
+  
   return (
     <>
       {/* Formulário de geração de relatório */}
@@ -298,7 +333,16 @@ function ReportsPage() {
           </div>
         )}
         
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-between items-center">
+          <div className="text-sm text-gray-500">
+            <div className="flex items-center space-x-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-blue-500">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+              </svg>
+              <span>Os relatórios incluem insights analíticos avançados</span>
+            </div>
+          </div>
+          
           <button
             onClick={generateReport}
             disabled={isGenerating}
@@ -319,8 +363,10 @@ function ReportsPage() {
         </div>
       </Card>
       
-      {/* Relatório gerado */}
-      {renderGeneratedReport()}
+      {/* Renderiza o relatório padrão ou avançado dependendo do estado */}
+      {generatedReport && (
+        showAdvancedView ? renderAdvancedReport() : renderStandardReport()
+      )}
     </>
   );
 }
