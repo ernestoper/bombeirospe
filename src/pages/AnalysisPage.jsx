@@ -5,7 +5,8 @@ import AdvancedFilters from '../components/analysis/AdvancedFilters';
 import ComparisonChart from '../components/analysis/ComparisonChart';
 import SummaryTable from '../components/dashboard/SummaryTable'; // Reutilizar a tabela
 import InteractiveMap from '../components/map/InteractiveMap'; // Reutilizar o mapa
-// Importar os novos componentes avançados
+
+// Importar os componentes de análise avançada
 import {
   HourlyDistributionChart,
   ResponseTimeByTypeChart,
@@ -14,6 +15,16 @@ import {
   ScatterAnalysisChart,
   AdvancedAnalysisPanel
 } from '../components/analysis/AdvancedAnalysisComponents';
+
+// Importar os componentes de análise geográfica
+// CORRIGIDO: Use os nomes de componentes corretos
+import {
+  ZoneConcentrationChart,
+  ResponseTimeByZoneChart,
+  ZoneTypeAnalysisChart,
+  GeographicAnalysisPanel
+} from '../components/analysis/GeographicAnalysisComponents';
+
 import { mockOccurrences } from '../data/mockOccurrences';
 
 // Função auxiliar para agregar dados para gráficos
@@ -29,7 +40,7 @@ const aggregateData = (data, key) => {
 
 function AnalysisPage({ user, onLogout }) {
   const [filteredOccurrences, setFilteredOccurrences] = useState(mockOccurrences);
-  const [viewMode, setViewMode] = useState('standard'); // 'standard' ou 'advanced'
+  const [viewMode, setViewMode] = useState('standard'); // 'standard', 'advanced' ou 'geographic'
 
   const handleApplyFilters = (filters) => {
     console.log('Aplicando filtros:', filters);
@@ -67,6 +78,48 @@ function AnalysisPage({ user, onLogout }) {
   const occurrencesByType = useMemo(() => aggregateData(filteredOccurrences, 'tipo'), [filteredOccurrences]);
   const occurrencesByBairro = useMemo(() => aggregateData(filteredOccurrences, 'bairro'), [filteredOccurrences]);
 
+  // Renderizar o conteúdo adequado conforme o modo de visualização
+  const renderContent = () => {
+    switch(viewMode) {
+      case 'advanced':
+        return <AdvancedAnalysisPanel occurrences={filteredOccurrences} />;
+      case 'geographic':
+        return <GeographicAnalysisPanel occurrences={filteredOccurrences} />;
+      default: // 'standard'
+        return (
+          <>
+            {/* Gráficos Comparativos */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <ComparisonChart 
+                type="bar" 
+                data={occurrencesByType} 
+                title="Ocorrências por Tipo" 
+                nameKey="name" 
+                dataKey="value" 
+                chartHeight='350px'
+              />
+              <ComparisonChart 
+                type="pie" 
+                data={occurrencesByBairro.slice(0, 6)} 
+                title="Ocorrências por Bairro (Top 6)" 
+                nameKey="name" 
+                dataKey="value" 
+                chartHeight='350px'
+              />
+            </div>
+
+            {/* Mapa e Tabela com dados filtrados */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <InteractiveMap occurrences={filteredOccurrences} height="400px" />
+              <div className="lg:col-span-1">
+                <SummaryTable data={filteredOccurrences} />
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar user={user} />
@@ -98,6 +151,16 @@ function AnalysisPage({ user, onLogout }) {
               >
                 Análise Avançada
               </button>
+              <button
+                onClick={() => setViewMode('geographic')}
+                className={`px-4 py-2 rounded-lg ${
+                  viewMode === 'geographic' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                Análise Geográfica
+              </button>
             </div>
           </div>
 
@@ -106,41 +169,8 @@ function AnalysisPage({ user, onLogout }) {
             onClearFilters={handleClearFilters} 
           />
 
-          {viewMode === 'standard' ? (
-            // VISÃO PADRÃO - Gráficos padrão, mapa e tabela
-            <>
-              {/* Gráficos Comparativos */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <ComparisonChart 
-                  type="bar" 
-                  data={occurrencesByType} 
-                  title="Ocorrências por Tipo" 
-                  nameKey="name" 
-                  dataKey="value" 
-                  chartHeight='350px'
-                />
-                <ComparisonChart 
-                  type="pie" 
-                  data={occurrencesByBairro.slice(0, 6)} 
-                  title="Ocorrências por Bairro (Top 6)" 
-                  nameKey="name" 
-                  dataKey="value" 
-                  chartHeight='350px'
-                />
-              </div>
-
-              {/* Mapa e Tabela com dados filtrados */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <InteractiveMap occurrences={filteredOccurrences} height="400px" />
-                <div className="lg:col-span-1">
-                  <SummaryTable data={filteredOccurrences} />
-                </div>
-              </div>
-            </>
-          ) : (
-            // VISÃO AVANÇADA - Visualizações analíticas avançadas
-            <AdvancedAnalysisPanel occurrences={filteredOccurrences} />
-          )}
+          {/* Renderiza o conteúdo com base no modo selecionado */}
+          {renderContent()}
         </main>
       </div>
     </div>
