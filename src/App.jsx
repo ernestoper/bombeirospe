@@ -12,6 +12,7 @@ const AnalysisPage = lazy(() => import('./pages/AnalysisPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const MapPage = lazy(() => import('./pages/MapPage'));
 const ReportsPage = lazy(() => import('./pages/ReportsPage'));
+const OccurrencePage = lazy(() => import('./pages/OccurrencePage')); // Nova página
 
 // Componente para rotas protegidas
 const ProtectedRoute = ({ children, requiredRole = null, pageTitle = null }) => {
@@ -76,6 +77,13 @@ function App() {
           <Route path="/map" element={
             <ProtectedRoute pageTitle="Mapa de Ocorrências">
               <MapPage />
+            </ProtectedRoute>
+          } />
+          
+          {/* Nova rota para registro de ocorrências */}
+          <Route path="/occurrences" element={
+            <ProtectedRoute pageTitle="Registro de Ocorrências">
+              <OccurrencePage />
             </ProtectedRoute>
           } />
           
