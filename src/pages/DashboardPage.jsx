@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import KPICard from '../components/dashboard/KPICard';
 import SummaryTable from '../components/dashboard/SummaryTable';
@@ -10,10 +10,10 @@ import InteractiveMap from '../components/map/InteractiveMap-vanilla';
 // Importe os componentes de insights
 import { 
   EnhancedTrendChart,
-  OccurrenceTypesChart,
-  RegionalDistributionChart,
-  TimePatternAnalysis,
-  PerformanceMetricsChart,
+  // OccurrenceTypesChart, // Não usado diretamente - está dentro do InsightsDashboard
+  // RegionalDistributionChart, // Não usado diretamente - está dentro do InsightsDashboard
+  // TimePatternAnalysis, // Não usado diretamente - está dentro do InsightsDashboard
+  // PerformanceMetricsChart, // Não usado diretamente - está dentro do InsightsDashboard
   InsightsDashboard
 } from '../components/dashboard/DashboardInsights';
 // Importe os dados mockados
@@ -78,8 +78,7 @@ function DashboardPage() {
   return (
     <>
       {/* Seletor de modo de visualização */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Dashboard Operacional</h2>
+      <div className="flex justify-end items-center mb-6">
         <div className="flex gap-2">
           <button
             onClick={() => setViewMode('standard')}
