@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import MainLayout from './pages/Layouts/MainLayout';
+import MainLayout from './components/layout/MainLayout';
+import { Toaster } from './components/common/Toaster';
 
 // Componentes que não precisam ser lazy loaded
 import LoginPage from './pages/LoginPage';
@@ -22,7 +23,7 @@ const ProtectedRoute = ({ children, requiredRole = null, pageTitle = null }) => 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -42,7 +43,7 @@ const ProtectedRoute = ({ children, requiredRole = null, pageTitle = null }) => 
     <MainLayout pageTitle={pageTitle}>
       <Suspense fallback={
         <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
         </div>
       }>
         {children}
@@ -54,6 +55,7 @@ const ProtectedRoute = ({ children, requiredRole = null, pageTitle = null }) => 
 function App() {
   return (
     <AuthProvider>
+      <Toaster />
       <BrowserRouter>
         <Routes>
           {/* Rota pública - Login */}
@@ -111,7 +113,7 @@ function App() {
               <p className="text-xl text-gray-600 mb-8">Página não encontrada</p>
               <button 
                 onClick={() => window.history.back()} 
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
               >
                 Voltar
               </button>

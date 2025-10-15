@@ -49,7 +49,7 @@ export function HourlyDistributionChart({ occurrences, height = '350px' }) {
       <h3 className="text-lg font-medium text-gray-800 mb-4">Distribuição por Hora do Dia</h3>
       
       {/* Insights sobre o horário de pico */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-blue-500">
+      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-primary">
         <p className="text-sm text-gray-700">
           <span className="font-medium">Horário de pico:</span> {peakHour.label} com {peakHour.count} ocorrências
         </p>
@@ -340,7 +340,7 @@ export function MultiDimensionalAnalysisChart({ occurrences, height = '350px' })
       <h3 className="text-lg font-medium text-gray-800 mb-4">Análise Multidimensional</h3>
       
       {/* Insights sobre a análise multidimensional */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-blue-500">
+      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-primary">
         <p className="text-sm text-gray-700">
           Este gráfico representa uma visão multidimensional das ocorrências,
           permitindo identificar padrões em volume, tempo de resposta, conclusão e criticidade.

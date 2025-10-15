@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import logo from '../../assets/logo.png';
 
 /**
  * Componente de barra lateral de navegação
@@ -8,7 +9,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const Sidebar = ({ open = true }) => {
   const { user, hasPermission } = useAuth();
   const location = useLocation();
-  
+
   // Definição dos itens do menu
   const menuItems = [
     {
@@ -63,21 +64,25 @@ const Sidebar = ({ open = true }) => {
       requiredRole: 'admin', // Apenas administradores
     },
   ];
-  
+
   // Filtrar itens do menu com base nas permissões do usuário
   const filteredMenuItems = menuItems.filter(
     item => !item.requiredRole || hasPermission(item.requiredRole)
   );
-  
+
   // Se o sidebar não estiver aberto, mostrar apenas ícones
   if (!open) {
     return (
-      <div className="h-screen bg-gray-800 text-white w-16 flex flex-col shadow-lg z-10">
-        <div className="p-4 flex justify-center border-b border-gray-700">
+      <div className="h-screen bg-gradient-to-b from-primary via-primary to-primary/90 text-white w-16 flex flex-col shadow-xl z-10 backdrop-blur-sm">
+        <div className="p-4 flex justify-center border-b border-white/10">
           <img
-            className="h-8 w-auto"
-            src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png"
+            className="h-8 w-auto drop-shadow-lg"
+            src={logo}
             alt="CBMPE Logo"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png';
+            }}
           />
         </div>
         <nav className="flex-1 px-2 py-4 space-y-2">
@@ -85,20 +90,19 @@ const Sidebar = ({ open = true }) => {
             <Link
               key={index}
               to={item.path}
-              className={`flex items-center justify-center p-2 rounded-md ${
-                location.pathname === item.path
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`flex items-center justify-center p-3 rounded-xl transition-all duration-300 ${location.pathname === item.path
+                  ? 'bg-white/20 text-white shadow-lg scale-105 backdrop-blur-sm'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white hover:scale-105'
+                }`}
               title={item.title}
             >
               {item.icon}
             </Link>
           ))}
         </nav>
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t border-white/10">
           <div className="flex items-center justify-center">
-            <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
+            <div className="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white/30">
               {user?.name?.charAt(0) || '?'}
             </div>
           </div>
@@ -106,44 +110,52 @@ const Sidebar = ({ open = true }) => {
       </div>
     );
   }
-  
+
   // Versão completa do sidebar
   return (
-    <div className="h-screen bg-gray-800 text-white w-64 flex flex-col shadow-lg z-10">
-      <div className="p-4 flex items-center justify-between border-b border-gray-700">
-        <div className="flex items-center">
+    <div className="h-screen bg-gradient-to-b from-primary to-primary text-white w-64 flex flex-col shadow-2xl z-10">
+      <div className="p-6 flex items-center justify-between border-b border-white/10">
+        <div className="flex items-center gap-3">
           <img
-            className="h-8 w-auto mr-2"
-            src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png"
+            className="h-10 w-auto drop-shadow-lg"
+            src={logo}
             alt="CBMPE Logo"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Brasao_corpo_de_bombeiros_militar_de_pernambuco.png';
+            }}
           />
-          <span className="font-semibold text-lg">CBMPE BI</span>
+          <div>
+            <span className="font-bold text-lg tracking-tight">CBMPE</span>
+            <p className="text-xs text-white/70 font-medium">Business Intelligence</p>
+          </div>
         </div>
       </div>
-      <nav className="flex-1 px-2 py-4 space-y-1">
+      <nav className="flex-1 px-3 py-6 space-y-2">
         {filteredMenuItems.map((item, index) => (
           <Link
             key={index}
             to={item.path}
-            className={`flex items-center px-4 py-2 rounded-md ${
-              location.pathname === item.path
-                ? 'bg-gray-900 text-white'
-                : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-            }`}
+            className={`group flex items-center px-4 py-3 rounded-xl transition-all duration-300 ${location.pathname === item.path
+                ? 'bg-white bg-opacity-20 text-white shadow-lg'
+                : 'text-white text-opacity-70 hover:bg-white hover:bg-opacity-10 hover:text-white'
+              }`}
           >
-            {item.icon}
-            <span className="ml-3">{item.title}</span>
+            <div className={`transition-transform duration-300 ${location.pathname === item.path ? 'scale-110' : 'group-hover:scale-110'}`}>
+              {item.icon}
+            </div>
+            <span className="ml-3 font-medium">{item.title}</span>
           </Link>
         ))}
       </nav>
-      <div className="p-4 border-t border-gray-700">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
+      <div className="p-4 border-t border-white border-opacity-10">
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-white bg-opacity-10 hover:bg-white hover:bg-opacity-15 transition-all duration-300">
+          <div className="h-10 w-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white ring-opacity-30">
             {user?.name?.charAt(0) || '?'}
           </div>
-          <div className="ml-3">
-            <p className="text-sm font-medium">{user?.name}</p>
-            <p className="text-xs text-gray-400">{user?.role === 'admin' ? 'Administrador' : 'Operador'}</p>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold truncate">{user?.name}</p>
+            <p className="text-xs text-white/60">{user?.role === 'admin' ? 'Administrador' : 'Operador'}</p>
           </div>
         </div>
       </div>

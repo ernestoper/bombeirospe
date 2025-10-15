@@ -101,7 +101,7 @@ export function ZoneConcentrationChart({ occurrences, height = '350px' }) {
             <div className="w-24 text-sm">{zone.name}</div>
             <div className="flex-1 bg-gray-200 rounded-full h-4">
               <div 
-                className="bg-blue-600 h-4 rounded-full" 
+                className="bg-primary h-4 rounded-full" 
                 style={{ width: `${zone.value}%` }}
               ></div>
             </div>
@@ -528,7 +528,7 @@ export function HeatMapChart({ occurrences, height = '400px', title = "Mapa de C
       >
         {!mapLoaded && (
           <div className="flex items-center justify-center h-full bg-gray-100 rounded-md">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
           </div>
         )}
       </div>
@@ -554,7 +554,7 @@ export function GeographicAnalysisPanel({ occurrences }) {
           <h3 className="text-lg font-medium text-gray-800 mb-4">Distribuição de Ocorrências</h3>
           
           {/* Insights sobre distribuição */}
-          <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-blue-500">
+          <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-primary">
             <p className="text-sm text-gray-700">
               <span className="font-medium">Concentração:</span> Centro e Zona Norte representam 65% e 45% das ocorrências respectivamente, indicando necessidade de maior atenção nestas regiões.
             </p>

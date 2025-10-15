@@ -226,7 +226,7 @@ const InteractiveMap = ({ occurrences = [], height = '400px', onSelectOccurrence
       >
         {!mapLoaded && (
           <div className="flex items-center justify-center h-full bg-gray-100 rounded-md">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
           </div>
         )}
       </div>

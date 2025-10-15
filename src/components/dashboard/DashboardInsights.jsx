@@ -4,15 +4,23 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, Sector, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis
 } from 'recharts';
 
-// Cores para uso consistente em todos os gráficos
+// Cores para uso consistente em todos os gráficos - Tema CBMPE
 const COLORS = {
-  primary: '#003366',
-  secondary: '#FF6600',
-  success: '#00C49F',
-  warning: '#FFBB28',
-  danger: '#FF0000',
-  info: '#0088FE',
-  categories: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#FF6B6B', '#6B66FF']
+  primary: '#DC2626', // Vermelho CBMPE
+  secondary: '#F59E0B', // Laranja
+  success: '#10B981', // Verde
+  warning: '#FBBF24', // Amarelo
+  danger: '#EF4444', // Vermelho claro
+  info: '#3B82F6', // Azul
+  categories: [
+    '#DC2626', // Vermelho - Incêndio
+    '#F59E0B', // Laranja - Acidente
+    '#3B82F6', // Azul - Resgate
+    '#06B6D4', // Ciano - Inundação
+    '#10B981', // Verde - Emergência Médica
+    '#8B5CF6', // Roxo - Desabamento
+    '#EC4899', // Rosa - Queda de Árvore
+  ]
 };
 
 // ==================== GRÁFICO DE TENDÊNCIA APRIMORADO ====================
@@ -97,15 +105,18 @@ export function EnhancedTrendChart({ occurrences }) {
   }, [chartData]);
   
   return (
-    <div className="bg-white p-5 rounded-lg shadow">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-medium text-gray-800">Tendência de Ocorrências</h3>
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-600">Período:</span>
+    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h3 className="text-lg font-bold text-gray-800">📈 Tendência de Ocorrências</h3>
+          <p className="text-sm text-gray-500 mt-1">Análise temporal das ocorrências</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600 font-medium">Período:</span>
           <select 
             value={period} 
             onChange={(e) => setPeriod(e.target.value)}
-            className="text-sm border border-gray-300 rounded px-2 py-1"
+            className="text-sm border-2 border-gray-200 rounded-xl px-4 py-2 font-medium focus:border-primary focus:outline-none transition-colors"
           >
             <option value="7">7 dias</option>
             <option value="30">30 dias</option>
@@ -116,24 +127,29 @@ export function EnhancedTrendChart({ occurrences }) {
       </div>
       
       {/* Insights sobre tendências */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-blue-500">
+      <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent border-l-4 border-primary">
         <div className="flex justify-between items-center">
           <div>
-            <p className="font-medium">
-              Tendência atual: <span className={
+            <p className="font-semibold text-gray-800">
+              Tendência atual: <span className={`${
                 trends.trend === 'Aumento' ? 'text-red-600' : 
                 trends.trend === 'Redução' ? 'text-green-600' : 'text-gray-600'
-              }>{trends.trend}</span>
+              }`}>
+                {trends.trend === 'Aumento' ? '📈' : trends.trend === 'Redução' ? '📉' : '➡️'} {trends.trend}
+              </span>
             </p>
-            <p className="text-sm text-gray-600">
-              {trends.percentage > 0 ? '+' : ''}{trends.percentage}% nos últimos 7 dias vs. semana anterior
+            <p className="text-sm text-gray-600 mt-1">
+              <span className={`font-semibold ${trends.percentage > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                {trends.percentage > 0 ? '+' : ''}{trends.percentage}%
+              </span> nos últimos 7 dias vs. semana anterior
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-sm text-gray-600">Média última semana:</p>
-            <p className="font-medium">{
+          <div className="text-right bg-white rounded-lg px-4 py-2 shadow-sm">
+            <p className="text-xs text-gray-500">Média última semana</p>
+            <p className="text-2xl font-bold text-primary">{
               Math.round(chartData.slice(-7).reduce((sum, item) => sum + item.occurrences, 0) / 7 * 10) / 10
-            } por dia</p>
+            }</p>
+            <p className="text-xs text-gray-500">por dia</p>
           </div>
         </div>
       </div>
@@ -293,60 +309,72 @@ export function OccurrenceTypesChart({ occurrences }) {
 
 // ==================== GRÁFICO DE DISTRIBUIÇÃO POR REGIÃO ====================
 export function RegionalDistributionChart({ occurrences }) {
-  // Agrupar ocorrências por região/bairro
+  // Agrupar ocorrências por bairro
   const regionData = useMemo(() => {
     const regionCounts = {};
     
-    // Função para extrair região/bairro do endereço
-    const extractRegion = (address) => {
-      if (!address) return 'Desconhecido';
-      
-      // Lógica simplificada - adaptar para seu formato de endereço
-      const parts = address.split(',');
-      return parts.length > 1 ? parts[1].trim() : parts[0].trim();
-    };
-    
-    // Contar por região
+    // Contar por bairro
     occurrences.forEach(occ => {
-      const region = extractRegion(occ.endereco);
-      regionCounts[region] = (regionCounts[region] || 0) + 1;
+      const bairro = occ.bairro || 'Não informado';
+      regionCounts[bairro] = (regionCounts[bairro] || 0) + 1;
     });
     
     // Converter para array e ordenar por frequência
     return Object.entries(regionCounts)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 10); // Top 10 regiões com mais ocorrências
+      .slice(0, 10); // Top 10 bairros com mais ocorrências
   }, [occurrences]);
   
   return (
-    <div className="bg-white p-5 rounded-lg shadow">
-      <h3 className="text-lg font-medium text-gray-800 mb-4">Distribuição Regional</h3>
+    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+      <div className="mb-6">
+        <h3 className="text-lg font-bold text-gray-800">📍 Distribuição por Bairro</h3>
+        <p className="text-sm text-gray-500 mt-1">Top 10 bairros com mais ocorrências</p>
+      </div>
       
       {/* Insights sobre distribuição regional */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-green-500">
-        <p className="font-medium">Concentração de Ocorrências:</p>
-        <p className="text-sm text-gray-600 mt-1">
-          {regionData[0]?.name || 'N/A'} e {regionData[1]?.name || 'N/A'} são as áreas com maior número de ocorrências, 
-          representando {regionData.length > 1 ? 
+      <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-green-50 to-transparent border-l-4 border-green-500">
+        <p className="font-semibold text-gray-800">🎯 Concentração de Ocorrências</p>
+        <p className="text-sm text-gray-600 mt-2">
+          <span className="font-semibold text-green-600">{regionData[0]?.name || 'N/A'}</span> e{' '}
+          <span className="font-semibold text-green-600">{regionData[1]?.name || 'N/A'}</span> são os bairros com maior número de ocorrências, 
+          representando <span className="font-semibold">{regionData.length > 1 ? 
             ((regionData[0].value + regionData[1].value) / occurrences.length * 100).toFixed(1) 
-            : 0}% do total.
+            : 0}%</span> do total.
         </p>
       </div>
       
       {/* Gráfico de barras horizontais */}
-      <div className="h-64">
+      <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             layout="vertical"
             data={regionData}
-            margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+            margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" />
-            <YAxis dataKey="name" type="category" tick={{fontSize: 12}} />
-            <Tooltip formatter={(value) => [`${value} ocorrências`, 'Total']} />
-            <Bar dataKey="value" fill={COLORS.info} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis 
+              type="number" 
+              tick={{ fontSize: 12 }}
+              label={{ value: 'Número de Ocorrências', position: 'insideBottom', offset: -5 }}
+            />
+            <YAxis 
+              dataKey="name" 
+              type="category" 
+              tick={{ fontSize: 13, fill: '#374151' }}
+              width={90}
+            />
+            <Tooltip 
+              formatter={(value) => [`${value} ocorrências`, 'Total']}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }}
+            />
+            <Bar 
+              dataKey="value" 
+              fill={COLORS.primary}
+              radius={[0, 8, 8, 0]}
+              label={{ position: 'right', fontSize: 12, fill: '#6B7280' }}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -356,78 +384,119 @@ export function RegionalDistributionChart({ occurrences }) {
 
 // ==================== COMPONENTE DE MÉTRICAS DE PERFORMANCE ====================
 export function PerformanceMetricsChart({ occurrences }) {
-  // Agrupar e calcular métricas por equipe/unidade
+  // Agrupar e calcular métricas por equipe
   const performanceData = useMemo(() => {
     const teams = {};
     
     // Processar dados por equipe
     occurrences.forEach(occ => {
-      const team = occ.equipe || 'Não atribuído';
-      if (!teams[team]) {
-        teams[team] = {
-          ocorrencias: 0,
-          tempoRespostaTotal: 0,
-          tempoRespondidasCount: 0,
-          finalizadas: 0,
-          emAndamento: 0,
-        };
-      }
+      // Cada ocorrência pode ter múltiplas equipes
+      const equipesArray = occ.equipesEnvolvidas || ['Não atribuído'];
       
-      teams[team].ocorrencias++;
-      
-      if (occ.status === 'Finalizado') {
-        teams[team].finalizadas++;
-      } else if (occ.status === 'Em Andamento' || occ.status === 'Controlado') {
-        teams[team].emAndamento++;
-      }
-      
-      if (occ.tempoResposta) {
-        const time = parseInt(occ.tempoResposta.replace('min', ''), 10);
-        if (!isNaN(time)) {
-          teams[team].tempoRespostaTotal += time;
-          teams[team].tempoRespondidasCount++;
+      equipesArray.forEach(equipe => {
+        if (!teams[equipe]) {
+          teams[equipe] = {
+            ocorrencias: 0,
+            tempoRespostaTotal: 0,
+            tempoRespondidasCount: 0,
+            finalizadas: 0,
+            emAndamento: 0,
+          };
         }
-      }
+        
+        teams[equipe].ocorrencias++;
+        
+        if (occ.status === 'Finalizado') {
+          teams[equipe].finalizadas++;
+        } else if (occ.status === 'Em Andamento' || occ.status === 'Controlado') {
+          teams[equipe].emAndamento++;
+        }
+        
+        if (occ.tempoResposta) {
+          const time = parseInt(occ.tempoResposta.replace('min', ''), 10);
+          if (!isNaN(time)) {
+            teams[equipe].tempoRespostaTotal += time;
+            teams[equipe].tempoRespondidasCount++;
+          }
+        }
+      });
     });
     
     // Calcular médias e taxas
-    return Object.entries(teams).map(([name, data]) => ({
-      name,
-      tempoMedioResposta: data.tempoRespondidasCount > 0 
-        ? Math.round(data.tempoRespostaTotal / data.tempoRespondidasCount) 
-        : 0,
-      taxaResolucao: data.ocorrencias > 0 
-        ? (data.finalizadas / data.ocorrencias * 100) 
-        : 0,
-      ocorrenciasAtendidas: data.ocorrencias,
-      emAndamento: data.emAndamento
-    })).filter(team => team.ocorrenciasAtendidas > 0);
+    return Object.entries(teams)
+      .map(([name, data]) => ({
+        name,
+        tempoMedioResposta: data.tempoRespondidasCount > 0 
+          ? Math.round(data.tempoRespostaTotal / data.tempoRespondidasCount) 
+          : 0,
+        taxaResolucao: data.ocorrencias > 0 
+          ? Math.round(data.finalizadas / data.ocorrencias * 100) 
+          : 0,
+        ocorrenciasAtendidas: data.ocorrencias,
+        emAndamento: data.emAndamento
+      }))
+      .filter(team => team.ocorrenciasAtendidas > 0)
+      .sort((a, b) => b.ocorrenciasAtendidas - a.ocorrenciasAtendidas)
+      .slice(0, 8); // Top 8 equipes
   }, [occurrences]);
   
+  const equipeMaisRapida = useMemo(() => 
+    [...performanceData].sort((a, b) => a.tempoMedioResposta - b.tempoMedioResposta)[0],
+    [performanceData]
+  );
+  
+  const equipeMelhorTaxa = useMemo(() => 
+    [...performanceData].sort((a, b) => b.taxaResolucao - a.taxaResolucao)[0],
+    [performanceData]
+  );
+  
   return (
-    <div className="bg-white p-5 rounded-lg shadow">
-      <h3 className="text-lg font-medium text-gray-800 mb-4">Métricas de Performance</h3>
+    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+      <div className="mb-6">
+        <h3 className="text-lg font-bold text-gray-800">⚡ Métricas de Performance por Equipe</h3>
+        <p className="text-sm text-gray-500 mt-1">Análise de eficiência operacional</p>
+      </div>
       
       {/* Insights sobre performance */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-yellow-500">
-        <p className="font-medium">Destaques de Performance:</p>
-        {performanceData.length > 0 ? (
-          <>
-            <p className="text-sm text-gray-600 mt-1">
-              Equipe mais rápida: <span className="font-medium">
-                {performanceData.sort((a, b) => a.tempoMedioResposta - b.tempoMedioResposta)[0]?.name || 'N/A'}
-              </span> ({performanceData.sort((a, b) => a.tempoMedioResposta - b.tempoMedioResposta)[0]?.tempoMedioResposta || 0} min)
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              Maior taxa de resolução: <span className="font-medium">
-                {performanceData.sort((a, b) => b.taxaResolucao - a.taxaResolucao)[0]?.name || 'N/A'}
-              </span> ({performanceData.sort((a, b) => b.taxaResolucao - a.taxaResolucao)[0]?.taxaResolucao.toFixed(1) || 0}%)
-            </p>
-          </>
-        ) : (
-          <p className="text-sm text-gray-600 mt-1">Dados insuficientes para análise de performance</p>
-        )}
+      <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl bg-gradient-to-r from-yellow-50 to-transparent border-l-4 border-yellow-500">
+          <p className="text-xs text-gray-500 mb-1">🏆 Equipe Mais Rápida</p>
+          {equipeMaisRapida ? (
+            <>
+              <p className="font-bold text-gray-800 text-lg">{equipeMaisRapida.name}</p>
+              <p className="text-sm text-gray-600">
+                Tempo médio: <span className="font-semibold text-yellow-600">{equipeMaisRapida.tempoMedioResposta} min</span>
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-gray-500">Sem dados</p>
+          )}
+        </div>
+        
+        <div className="p-4 rounded-xl bg-gradient-to-r from-green-50 to-transparent border-l-4 border-green-500">
+          <p className="text-xs text-gray-500 mb-1">🎯 Melhor Taxa de Resolução</p>
+          {equipeMelhorTaxa ? (
+            <>
+              <p className="font-bold text-gray-800 text-lg">{equipeMelhorTaxa.name}</p>
+              <p className="text-sm text-gray-600">
+                Taxa: <span className="font-semibold text-green-600">{equipeMelhorTaxa.taxaResolucao}%</span>
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-gray-500">Sem dados</p>
+          )}
+        </div>
       </div>
+      
+      {performanceData.length > 0 ? (
+        <div className="mb-6">
+          <p className="text-sm text-gray-600 font-medium">
+            Comparativo de {performanceData.length} equipes ativas
+          </p>
+        </div>
+      ) : (
+        <p className="text-sm text-gray-600 mb-6">Dados insuficientes para análise de performance</p>
+      )}
       
       {/* Gráfico de radar */}
       <div className="h-64">
@@ -512,7 +581,7 @@ export function TimePatternAnalysis({ occurrences }) {
       <h3 className="text-lg font-medium text-gray-800 mb-4">Análise de Padrões Temporais</h3>
       
       {/* Insights sobre padrões */}
-      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-blue-500">
+      <div className="mb-4 p-3 rounded bg-gray-50 border-l-4 border-primary">
         <p className="font-medium">Padrões Identificados:</p>
         <p className="text-sm text-gray-600 mt-1">
           Pico de ocorrências: <span className="font-medium">{patterns.peakPeriod}</span> em <span className="font-medium">{patterns.peakDay}</span>

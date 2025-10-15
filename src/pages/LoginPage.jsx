@@ -20,7 +20,7 @@ function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-4">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-center text-blue-800">CBMPE</h1>
+        <h1 className="text-3xl font-bold text-center text-primary">CBMPE</h1>
         <h2 className="text-xl text-center text-gray-600">Dasboard</h2>
       </div>
       <LoginForm onLoginSuccess={handleLoginSuccess} />

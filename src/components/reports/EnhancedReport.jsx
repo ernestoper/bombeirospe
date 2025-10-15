@@ -200,9 +200,9 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
     <div className="space-y-6">
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
+        <div className="bg-primary/10 p-4 rounded-lg">
           <p className="text-sm text-gray-500">Total de Ocorrências</p>
-          <p className="text-2xl font-semibold text-blue-600">{kpis.totalCount}</p>
+          <p className="text-2xl font-semibold text-primary">{kpis.totalCount}</p>
         </div>
         <div className="bg-yellow-50 p-4 rounded-lg">
           <p className="text-sm text-gray-500">Em Andamento</p>
@@ -212,9 +212,9 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
           <p className="text-sm text-gray-500">Finalizadas</p>
           <p className="text-2xl font-semibold text-green-600">{kpis.finished}</p>
         </div>
-        <div className="bg-blue-50 p-4 rounded-lg">
+        <div className="bg-primary/10 p-4 rounded-lg">
           <p className="text-sm text-gray-500">Tempo Médio</p>
-          <p className="text-2xl font-semibold text-blue-600">{kpis.avgResponseTime} min</p>
+          <p className="text-2xl font-semibold text-primary">{kpis.avgResponseTime} min</p>
         </div>
         <div className="bg-red-50 p-4 rounded-lg">
           <p className="text-sm text-gray-500">Vítimas</p>
@@ -227,11 +227,11 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
       </div>
 
       {/* Insights principais */}
-      <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+      <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-primary">
         <h3 className="font-medium text-gray-800 mb-2">Insights Principais</h3>
         <ul className="space-y-2">
           <li className="flex items-start">
-            <span className="text-blue-500 mr-2">•</span>
+            <span className="text-primary mr-2">•</span>
             <p className="text-sm text-gray-600">
               {typeChartData.length > 0 ? 
                 `O tipo de ocorrência mais frequente é "${typeChartData[0].name}" com ${typeChartData[0].value} casos (${Math.round(typeChartData[0].value / kpis.totalCount * 100)}% do total).` : 
@@ -239,7 +239,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             </p>
           </li>
           <li className="flex items-start">
-            <span className="text-blue-500 mr-2">•</span>
+            <span className="text-primary mr-2">•</span>
             <p className="text-sm text-gray-600">
               {kpis.totalCount > 0 ?
                 `Taxa de conclusão: ${Math.round(kpis.finished / kpis.totalCount * 100)}% das ocorrências foram finalizadas no período.` :
@@ -247,7 +247,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             </p>
           </li>
           <li className="flex items-start">
-            <span className="text-blue-500 mr-2">•</span>
+            <span className="text-primary mr-2">•</span>
             <p className="text-sm text-gray-600">
               {kpis.totalVictims > 0 ?
                 `Média de ${(kpis.totalVictims / kpis.totalCount).toFixed(2)} vítimas por ocorrência.` :
@@ -648,35 +648,35 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
                 <div className="flex items-center">
                   <div className="w-24 text-sm">Centro</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-4">
-                    <div className="bg-blue-600 h-4 rounded-full" style={{ width: '65%' }}></div>
+                    <div className="bg-primary h-4 rounded-full" style={{ width: '65%' }}></div>
                   </div>
                   <div className="w-12 text-right text-sm">65%</div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-24 text-sm">Zona Norte</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-4">
-                    <div className="bg-blue-600 h-4 rounded-full" style={{ width: '45%' }}></div>
+                    <div className="bg-primary h-4 rounded-full" style={{ width: '45%' }}></div>
                   </div>
                   <div className="w-12 text-right text-sm">45%</div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-24 text-sm">Zona Sul</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-4">
-                    <div className="bg-blue-600 h-4 rounded-full" style={{ width: '30%' }}></div>
+                    <div className="bg-primary h-4 rounded-full" style={{ width: '30%' }}></div>
                   </div>
                   <div className="w-12 text-right text-sm">30%</div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-24 text-sm">Zona Leste</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-4">
-                    <div className="bg-blue-600 h-4 rounded-full" style={{ width: '25%' }}></div>
+                    <div className="bg-primary h-4 rounded-full" style={{ width: '25%' }}></div>
                   </div>
                   <div className="w-12 text-right text-sm">25%</div>
                 </div>
                 <div className="flex items-center">
                   <div className="w-24 text-sm">Zona Oeste</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-4">
-                    <div className="bg-blue-600 h-4 rounded-full" style={{ width: '20%' }}></div>
+                    <div className="bg-primary h-4 rounded-full" style={{ width: '20%' }}></div>
                   </div>
                   <div className="w-12 text-right text-sm">20%</div>
                 </div>
@@ -805,7 +805,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             onClick={() => setSelectedTab('overview')}
             className={`py-3 px-4 font-medium text-sm border-b-2 ${
               selectedTab === 'overview'
-                ? 'border-blue-600 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
@@ -815,7 +815,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             onClick={() => setSelectedTab('temporal')}
             className={`py-3 px-4 font-medium text-sm border-b-2 ${
               selectedTab === 'temporal'
-                ? 'border-blue-600 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
@@ -825,7 +825,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             onClick={() => setSelectedTab('performance')}
             className={`py-3 px-4 font-medium text-sm border-b-2 ${
               selectedTab === 'performance'
-                ? 'border-blue-600 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
@@ -835,7 +835,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
             onClick={() => setSelectedTab('geographic')}
             className={`py-3 px-4 font-medium text-sm border-b-2 ${
               selectedTab === 'geographic'
-                ? 'border-blue-600 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
@@ -864,7 +864,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
           <button className="px-3 py-2 border border-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-50">
             Imprimir
           </button>
-          <button className="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">
+          <button className="px-3 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary/90">
             Compartilhar
           </button>
         </div>
@@ -916,7 +916,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
                     <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                       <span className={`px-2 py-1 text-xs rounded-full font-medium ${
                         occurrence.status === 'Em Andamento' ? 'bg-yellow-100 text-yellow-800' :
-                        occurrence.status === 'Controlado' ? 'bg-blue-100 text-blue-800' :
+                        occurrence.status === 'Controlado' ? 'bg-primary/10 text-primary' :
                         occurrence.status === 'Finalizado' ? 'bg-green-100 text-green-800' : ''
                       }`}>
                         {occurrence.status}
@@ -932,7 +932,7 @@ export function EnhancedReport({ reportType, occurrences, dateRange, area }) {
           </div>
           {reportData.length > 10 && (
             <div className="mt-4 text-center">
-              <button className="text-sm text-blue-600 hover:text-blue-800">
+              <button className="text-sm text-primary hover:text-primary/90">
                 Ver mais ocorrências ({reportData.length - 10} restantes)
               </button>
             </div>

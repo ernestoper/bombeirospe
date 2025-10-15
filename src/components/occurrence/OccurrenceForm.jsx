@@ -186,7 +186,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               name={name}
               value={formData[name] || ''}
               onChange={handleInputChange}
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             >
               <option value="">Selecione...</option>
               {options.map(option => (
@@ -207,7 +207,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               value={formData[name] || ''}
               onChange={handleInputChange}
               rows={3}
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
         );
@@ -223,7 +223,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               name={name}
               value={formData[name] || ''}
               onChange={handleInputChange}
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
         );
@@ -239,7 +239,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               name={name}
               value={formData[name] || ''}
               onChange={handleInputChange}
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
         );
@@ -269,7 +269,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
       )}
 
       {savedOffline && (
-        <div className="mb-4 p-3 bg-blue-100 text-blue-800 rounded-md">
+        <div className="mb-4 p-3 bg-primary/10 text-primary rounded-md">
           Ocorrência salva offline com sucesso!
         </div>
       )}
@@ -287,7 +287,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 value={formData.tipo}
                 onChange={handleInputChange}
                 required
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               >
                 <option value="">Selecione o tipo...</option>
                 {Object.keys(occurrenceTypes).map(type => (
@@ -306,7 +306,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 value={formData.dataHora}
                 onChange={handleInputChange}
                 required
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -318,7 +318,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               >
                 <option value="Em Andamento">Em Andamento</option>
                 <option value="Controlado">Controlado</option>
@@ -334,7 +334,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 name="prioridade"
                 value={formData.prioridade}
                 onChange={handleInputChange}
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               >
                 <option value="baixa">Baixa</option>
                 <option value="media">Média</option>
@@ -356,7 +356,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               onChange={handleInputChange}
               required
               placeholder="Ex: Av. Boa Viagem, 1000, Recife"
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
 
@@ -372,7 +372,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 onChange={handleInputChange}
                 step="any"
                 placeholder="-8.1169"
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -387,7 +387,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 onChange={handleInputChange}
                 step="any"
                 placeholder="-34.8911"
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -396,7 +396,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 type="button"
                 onClick={getCurrentLocation}
                 disabled={locationLoading}
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-400"
               >
                 {locationLoading ? 'Obtendo...' : 'Obter Localização'}
               </button>
@@ -415,7 +415,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 value={formData.vitimas}
                 onChange={handleInputChange}
                 min="0"
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -429,7 +429,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
                 value={formData.tempoResposta}
                 onChange={handleInputChange}
                 placeholder="Ex: 5min"
-                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
           </div>
@@ -457,7 +457,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               onChange={handleInputChange}
               rows={4}
               placeholder="Descreva detalhadamente a ocorrência..."
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
 
@@ -471,7 +471,7 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               onChange={handleInputChange}
               rows={3}
               placeholder="Informações complementares..."
-              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 shadow-sm p-2 text-sm focus:outline-none focus:ring-primary focus:border-primary"
             />
           </div>
 
@@ -507,14 +507,14 @@ const OccurrenceForm = ({ onSubmit, onCancel }) => {
               <button
                 type="button"
                 onClick={onCancel}
-                className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 Cancelar
               </button>
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 {isOffline ? 'Salvar Offline' : 'Registrar Ocorrência'}
               </button>

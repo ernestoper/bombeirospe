@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import KPICard from '../components/dashboard/KPICard';
 import SummaryTable from '../components/dashboard/SummaryTable';
+import LiveStatsCard from '../components/dashboard/LiveStatsCard';
+import NeighborhoodHeatmap from '../components/dashboard/NeighborhoodHeatmap';
+import ExportButton from '../components/common/ExportButton';
 // Importe o InteractiveMap vanilla
 import InteractiveMap from '../components/map/InteractiveMap-vanilla';
 // Importe os componentes de insights
@@ -76,70 +79,89 @@ function DashboardPage() {
     <>
       {/* Seletor de modo de visualização */}
       <div className="flex justify-between items-center mb-6">
-        {/* <h1 className="text-2xl font-bold text-gray-800">Dashboard Operacional</h1> */}
-        <div className="flex space-x-2">
+        <h2 className="text-2xl font-bold text-gray-800">Dashboard Operacional</h2>
+        <div className="flex gap-2">
           <button
             onClick={() => setViewMode('standard')}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
               viewMode === 'standard' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-primary text-white shadow-lg scale-105' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Visão Padrão
+            📊 Visão Padrão
           </button>
           <button
             onClick={() => setViewMode('insights')}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
               viewMode === 'insights' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-primary text-white shadow-lg scale-105' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Insights Avançados
+            🔍 Análise Avançada
           </button>
         </div>
       </div>
       
       {viewMode === 'standard' ? (
-        // VISÃO PADRÃO DO DASHBOARD
+        // VISÃO PADRÃO DO DASHBOARD - Operacional e em tempo real
         <>
+          {/* Header com botão de exportar */}
+          <div className="flex justify-end mb-4">
+            <ExportButton data={occurrences} filename="ocorrencias_cbmpe" />
+          </div>
+          
+          {/* Live Stats Card - Destaque */}
+          <div className="mb-6">
+            <LiveStatsCard occurrences={occurrences} />
+          </div>
+          
           {/* KPIs Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <KPICard
               title="Ocorrências Hoje"
               value={kpis.occurrencesToday}
               color="bg-red-500"
+              animate={true}
             />
             <KPICard
               title="Em Andamento"
               value={kpis.inProgress}
               color="bg-yellow-500"
+              animate={true}
             />
             <KPICard
               title="Tempo Médio Resposta"
               value={kpis.avgResponseTime}
-              color="bg-blue-500"
+              color="bg-primary"
+              animate={false}
             />
             <KPICard
               title="Total de Vítimas (Período)"
               value={kpis.totalVictims}
               color="bg-purple-500"
+              animate={true}
             />
           </div>
           
-          {/* Chart & Map Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <div>
-              <EnhancedTrendChart occurrences={occurrences} />
-            </div>
-            <div>
+          {/* Chart, Map & Heatmap Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div className="lg:col-span-2">
               <InteractiveMap 
                 occurrences={occurrences} 
-                height="400px" 
+                height="450px" 
                 onSelectOccurrence={handleSelectOccurrence}
               />
             </div>
+            <div>
+              <NeighborhoodHeatmap occurrences={occurrences} />
+            </div>
+          </div>
+          
+          {/* Trend Chart */}
+          <div className="mb-6">
+            <EnhancedTrendChart occurrences={occurrences} />
           </div>
           
           {/* Selected Occurrence Info (if any) */}
@@ -165,7 +187,7 @@ function DashboardPage() {
                   <p className="text-sm text-gray-500">Status:</p>
                   <p className={`font-medium ${
                     selectedOccurrence.status === 'Em Andamento' ? 'text-yellow-600' :
-                    selectedOccurrence.status === 'Controlado' ? 'text-blue-600' :
+                    selectedOccurrence.status === 'Controlado' ? 'text-primary' :
                     selectedOccurrence.status === 'Finalizado' ? 'text-green-600' : ''
                   }`}>
                     {selectedOccurrence.status}
@@ -192,7 +214,7 @@ function DashboardPage() {
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <h4 className="text-sm font-medium text-gray-700 mb-2">Ações Administrativas:</h4>
                   <div className="flex gap-2">
-                    <button className="px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700">
+                    <button className="px-3 py-1 text-xs bg-primary text-white rounded hover:bg-primary/90">
                       Atribuir Equipe
                     </button>
                     <button className="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700">

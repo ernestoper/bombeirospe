@@ -127,39 +127,42 @@ function AnalysisPage({ user, onLogout }) {
 
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-semibold text-gray-800">Análise Detalhada</h2>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">Análise Detalhada</h2>
+              <p className="text-sm text-gray-500 mt-1">Explore os dados com diferentes perspectivas</p>
+            </div>
             
             {/* Seletor de modo de visualização */}
-            <div className="flex space-x-2">
+            <div className="flex gap-2">
               <button
                 onClick={() => setViewMode('standard')}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                   viewMode === 'standard' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    ? 'bg-primary text-white shadow-lg scale-105' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Visão Padrão
+                📊 Visão Padrão
               </button>
               <button
                 onClick={() => setViewMode('advanced')}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                   viewMode === 'advanced' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    ? 'bg-primary text-white shadow-lg scale-105' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Análise Avançada
+                🔬 Análise Avançada
               </button>
               <button
                 onClick={() => setViewMode('geographic')}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                   viewMode === 'geographic' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    ? 'bg-primary text-white shadow-lg scale-105' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Análise Geográfica
+                🗺️ Análise Geográfica
               </button>
             </div>
           </div>

@@ -41,7 +41,7 @@ function AdminPage() {
             onClick={() => setActiveTab('users')}
             className={`${
               activeTab === 'users'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
@@ -51,7 +51,7 @@ function AdminPage() {
             onClick={() => setActiveTab('teams')}
             className={`${
               activeTab === 'teams'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
@@ -61,7 +61,7 @@ function AdminPage() {
             onClick={() => setActiveTab('settings')}
             className={`${
               activeTab === 'settings'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
@@ -71,7 +71,7 @@ function AdminPage() {
             onClick={() => setActiveTab('logs')}
             className={`${
               activeTab === 'logs'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
           >
@@ -91,7 +91,7 @@ function AdminPage() {
                 className="rounded-md border border-gray-300 px-3 py-2 text-sm w-64"
               />
             </div>
-            <button className="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">
+            <button className="px-3 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary/90">
               Adicionar Usuário
             </button>
           </div>
@@ -136,7 +136,7 @@ function AdminPage() {
                         className={`px-2 py-1 text-xs rounded-full font-medium ${
                           user.role === 'admin'
                             ? 'bg-purple-100 text-purple-800'
-                            : 'bg-blue-100 text-blue-800'
+                            : 'bg-primary/10 text-primary'
                         }`}
                       >
                         {user.role === 'admin' ? 'Administrador' : 'Operador'}
@@ -155,7 +155,7 @@ function AdminPage() {
                     </td>
                     <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex space-x-2">
-                        <button className="text-blue-600 hover:text-blue-800">
+                        <button className="text-primary hover:text-primary/90">
                           Editar
                         </button>
                         <button className="text-red-600 hover:text-red-800">
@@ -181,7 +181,7 @@ function AdminPage() {
                 className="rounded-md border border-gray-300 px-3 py-2 text-sm w-64"
               />
             </div>
-            <button className="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">
+            <button className="px-3 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary/90">
               Adicionar Equipe
             </button>
           </div>
@@ -237,10 +237,10 @@ function AdminPage() {
                     </td>
                     <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex space-x-2">
-                        <button className="text-blue-600 hover:text-blue-800">
+                        <button className="text-primary hover:text-primary/90">
                           Editar
                         </button>
-                        <button className="text-blue-600 hover:text-blue-800">
+                        <button className="text-primary hover:text-primary/90">
                           Detalhes
                         </button>
                       </div>
@@ -273,7 +273,7 @@ function AdminPage() {
               <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-50">
                 Restaurar Padrões
               </button>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm hover:bg-blue-700">
+              <button className="px-4 py-2 bg-primary text-white rounded-md shadow-sm hover:bg-primary/90">
                 Salvar Alterações
               </button>
             </div>
@@ -304,11 +304,11 @@ function AdminPage() {
             <div className="text-green-400">[2025-04-28 10:23:15] INFO: Sistema iniciado com sucesso</div>
             <div className="text-yellow-400">[2025-04-28 11:45:22] WARN: Tentativa de login falhou para usuário: usuario123</div>
             <div className="text-red-400">[2025-04-28 14:32:10] ERROR: Falha ao conectar ao servidor de mapas</div>
-            <div className="text-blue-400">[2025-04-28 15:10:05] INFO: Nova ocorrência registrada #12458</div>
-            <div className="text-blue-400">[2025-04-28 16:27:18] INFO: Usuário 'admin' alterou configurações do sistema</div>
+            <div className="text-primary">[2025-04-28 15:10:05] INFO: Nova ocorrência registrada #12458</div>
+            <div className="text-primary">[2025-04-28 16:27:18] INFO: Usuário 'admin' alterou configurações do sistema</div>
             <div className="text-yellow-400">[2025-04-28 18:05:33] WARN: Uso de CPU acima de 80%</div>
-            <div className="text-blue-400">[2025-04-29 08:15:42] INFO: Backup automático concluído</div>
-            <div className="text-blue-400">[2025-04-29 09:30:11] INFO: Usuário 'operador1' gerou relatório #789</div>
+            <div className="text-primary">[2025-04-29 08:15:42] INFO: Backup automático concluído</div>
+            <div className="text-primary">[2025-04-29 09:30:11] INFO: Usuário 'operador1' gerou relatório #789</div>
             <div className="text-green-400">[2025-04-29 10:00:00] INFO: Rotina de limpeza de cache executada</div>
             <div className="text-red-400">[2025-04-29 11:23:45] ERROR: Falha ao processar imagem da ocorrência #12460</div>
           </div>
