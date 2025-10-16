@@ -31,7 +31,7 @@ function ReportsPage() {
   
   // Mock de tipos de relatórios
   const reportTypes = [
-    { id: 'occurrence', name: 'Relatório de Ocorrências', icon: '🔥', color: 'from-red-500 to-red-700' },
+    { id: 'occurrence', name: 'Relatório de Ocorrências', icon: '🔥', color: 'from-red-400 to-red-600' },
     { id: 'performance', name: 'Relatório de Desempenho', icon: '📊', color: 'from-blue-500 to-blue-700' },
     { id: 'resources', name: 'Utilização de Recursos', icon: '🚒', color: 'from-purple-500 to-purple-700' },
     { id: 'time', name: 'Tempos de Resposta', icon: '⏱️', color: 'from-green-500 to-green-700' },
@@ -589,7 +589,7 @@ function ReportsPage() {
         {/* Header do Relatório */}
         <div className="mb-6 pb-6 border-b-2 border-gray-200">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-red-700 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-red-600 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-2xl">{reportTypes.find(t => t.id === report.type)?.icon || '📄'}</span>
             </div>
             <div>
@@ -628,7 +628,7 @@ function ReportsPage() {
             </button>
             <button 
               onClick={exportToPDF}
-              className="px-4 py-2 bg-gradient-to-r from-primary to-red-700 text-white text-sm rounded-xl hover:from-red-700 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium flex items-center gap-2"
+              className="px-4 py-2 bg-gradient-to-r from-primary to-red-600 text-white text-sm rounded-xl hover:from-red-600 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium flex items-center gap-2"
             >
               <span>📥</span>
               Exportar PDF
@@ -792,7 +792,7 @@ function ReportsPage() {
             </div>
             <button 
               onClick={exportAdvancedToPDF}
-              className="px-4 py-2 bg-gradient-to-r from-primary to-red-700 text-white text-sm rounded-xl hover:from-red-700 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium flex items-center gap-2 whitespace-nowrap"
+              className="px-4 py-2 bg-gradient-to-r from-primary to-red-600 text-white text-sm rounded-xl hover:from-red-600 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium flex items-center gap-2 whitespace-nowrap"
             >
               <span>📥</span>
               Exportar PDF com Gráficos
@@ -826,7 +826,7 @@ function ReportsPage() {
       {/* Formulário de geração de relatório */}
       <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-primary to-red-700 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-primary to-red-600 rounded-xl flex items-center justify-center shadow-lg">
             <span className="text-2xl">📝</span>
           </div>
           <div>
@@ -928,7 +928,7 @@ function ReportsPage() {
           <button
             onClick={generateReport}
             disabled={isGenerating}
-            className="px-6 py-3 bg-gradient-to-r from-primary to-red-700 text-white rounded-xl shadow-lg hover:from-red-700 hover:to-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-all duration-300 transform hover:scale-105 font-medium"
+            className="px-6 py-3 bg-gradient-to-r from-primary to-red-600 text-white rounded-xl shadow-lg hover:from-red-600 hover:to-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-all duration-300 transform hover:scale-105 font-medium"
           >
             {isGenerating ? (
               <span className="flex items-center gap-2">

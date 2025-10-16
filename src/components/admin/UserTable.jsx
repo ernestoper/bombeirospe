@@ -147,7 +147,7 @@ function UserTable() {
                   <button onClick={() => handleEditUser(user)} className="text-indigo-600 hover:text-indigo-900">
                     Editar
                   </button>
-                  <button onClick={() => handleDeleteUser(user.id)} className="text-red-600 hover:text-red-900">
+                  <button onClick={() => handleDeleteUser(user.id)} className="text-red-500 hover:text-red-700">
                     Excluir
                   </button>
                 </td>

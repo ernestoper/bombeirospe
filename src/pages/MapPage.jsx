@@ -105,7 +105,7 @@ function MapPage() {
           {/* Filtros Modernos */}
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-red-700 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-red-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-xl">🔍</span>
               </div>
               <h3 className="text-lg font-bold text-gray-800">Filtros</h3>
@@ -122,8 +122,8 @@ function MapPage() {
                   <button
                     onClick={() => setFilterType('all')}
                     className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 transform hover:scale-105 ${filterType === 'all'
-                        ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-lg scale-105'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                      ? 'bg-gradient-to-r from-primary to-red-600 text-white shadow-lg scale-105'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                       }`}
                   >
                     Todos
@@ -133,8 +133,8 @@ function MapPage() {
                       key={index}
                       onClick={() => setFilterType(type)}
                       className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 transform hover:scale-105 ${filterType === type
-                          ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-lg scale-105'
-                          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                        ? 'bg-gradient-to-r from-primary to-red-600 text-white shadow-lg scale-105'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                         }`}
                     >
                       {type}
@@ -153,8 +153,8 @@ function MapPage() {
                   <button
                     onClick={() => setFilterStatus('all')}
                     className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 transform hover:scale-105 ${filterStatus === 'all'
-                        ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-lg scale-105'
-                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                      ? 'bg-gradient-to-r from-primary to-red-600 text-white shadow-lg scale-105'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                       }`}
                   >
                     Todos
@@ -164,8 +164,8 @@ function MapPage() {
                       key={index}
                       onClick={() => setFilterStatus(status)}
                       className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 transform hover:scale-105 ${filterStatus === status
-                          ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-lg scale-105'
-                          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                        ? 'bg-gradient-to-r from-primary to-red-600 text-white shadow-lg scale-105'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                         }`}
                     >
                       {status}
@@ -191,8 +191,8 @@ function MapPage() {
                       key={period.value}
                       onClick={() => setDateRange(period.value)}
                       className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 transform hover:scale-105 ${dateRange === period.value
-                          ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-lg scale-105'
-                          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                        ? 'bg-gradient-to-r from-primary to-red-600 text-white shadow-lg scale-105'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                         }`}
                     >
                       {period.icon} {period.label}
@@ -221,7 +221,7 @@ function MapPage() {
                   <span className="text-base">📍</span>
                   Resultados:
                 </p>
-                <span className="px-4 py-1.5 bg-gradient-to-r from-primary to-red-700 text-white rounded-full text-sm font-bold shadow-lg animate-pulse">
+                <span className="px-4 py-1.5 bg-gradient-to-r from-primary to-red-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse">
                   {filteredOccurrences.length}
                 </span>
               </div>
@@ -232,7 +232,7 @@ function MapPage() {
           {selectedOccurrence && (
             <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300 animate-fadeIn">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-red-700 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-red-600 rounded-xl flex items-center justify-center shadow-lg">
                   <span className="text-xl">📋</span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detalhes</h3>
@@ -250,8 +250,8 @@ function MapPage() {
                     </span>
                   </div>
                   <span className={`inline-block px-3 py-1 text-xs rounded-full font-medium mt-2 ${selectedOccurrence.status === 'Em Andamento' ? 'bg-yellow-100 text-yellow-700 border border-yellow-300' :
-                      selectedOccurrence.status === 'Controlado' ? 'bg-red-50 text-primary border border-red-200' :
-                        selectedOccurrence.status === 'Finalizado' ? 'bg-green-100 text-green-700 border border-green-300' : ''
+                    selectedOccurrence.status === 'Controlado' ? 'bg-red-50 text-primary border border-red-200' :
+                      selectedOccurrence.status === 'Finalizado' ? 'bg-green-100 text-green-700 border border-green-300' : ''
                     }`}>
                     {selectedOccurrence.status}
                   </span>
@@ -281,7 +281,7 @@ function MapPage() {
                       <span className="text-lg">🚑</span>
                       <div className="flex-1">
                         <p className="text-xs text-gray-500 font-medium">Vítimas</p>
-                        <p className="text-lg font-bold text-red-600">{selectedOccurrence.vitimas}</p>
+                        <p className="text-lg font-bold text-red-500">{selectedOccurrence.vitimas}</p>
                       </div>
                     </div>
                   )}
@@ -297,7 +297,7 @@ function MapPage() {
 
                 {hasPermission('operador') && (
                   <div className="pt-4 mt-4 border-t border-gray-200">
-                    <button className="w-full py-3 px-4 rounded-xl shadow-lg text-sm font-medium text-white bg-gradient-to-r from-primary to-red-700 hover:from-red-700 hover:to-primary transition-all duration-300 transform hover:scale-105">
+                    <button className="w-full py-3 px-4 rounded-xl shadow-lg text-sm font-medium text-white bg-gradient-to-r from-primary to-red-600 hover:from-red-600 hover:to-primary transition-all duration-300 transform hover:scale-105">
                       📄 Ver Relatório Completo
                     </button>
                   </div>
@@ -310,7 +310,7 @@ function MapPage() {
                       Ações Rápidas
                     </h4>
                     <div className="flex flex-col gap-2">
-                      <button className="w-full py-2 px-3 text-xs font-medium bg-gradient-to-r from-primary to-red-700 text-white rounded-lg hover:from-red-700 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+                      <button className="w-full py-2 px-3 text-xs font-medium bg-gradient-to-r from-primary to-red-600 text-white rounded-lg hover:from-red-600 hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
                         👥 Atribuir Equipe
                       </button>
                       <button className="w-full py-2 px-3 text-xs font-medium bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">

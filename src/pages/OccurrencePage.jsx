@@ -47,7 +47,7 @@ function OccurrencePage() {
           onCancel={handleCancelOccurrence}
         />
       ) : (
-        <div className="p-4 bg-red-100 text-red-800">
+        <div className="p-4 bg-red-100 text-red-700">
           Acesso negado: você não tem permissão para acessar esta página
         </div>
       )}

@@ -219,7 +219,7 @@ function DashboardPage() {
                     <button className="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700">
                       Atualizar Status
                     </button>
-                    <button className="px-3 py-1 text-xs bg-red-600 text-white rounded hover:bg-red-700">
+                    <button className="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600">
                       Priorizar
                     </button>
                   </div>

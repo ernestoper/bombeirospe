@@ -158,7 +158,7 @@ function AdminPage() {
                         <button className="text-primary hover:text-primary/90">
                           Editar
                         </button>
-                        <button className="text-red-600 hover:text-red-800">
+                        <button className="text-red-500 hover:text-red-700">
                           {user.status === 'active' ? 'Desativar' : 'Ativar'}
                         </button>
                       </div>
